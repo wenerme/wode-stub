@@ -2,7 +2,6 @@ import React, { lazy, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Client } from '@urql/core';
 import { getGraphQLUrl } from '@wener/console/client/graphql';
-import { ComponentProvider } from '@wener/console/components';
 import { ErrorSuspenseBoundary, getAccessToken, SiteLogo } from '@wener/console/console';
 import { createUrqlClient } from '@wener/console/urql';
 import { getGlobalStates } from '@wener/utils';
@@ -13,7 +12,6 @@ import { AuthReady } from '@/foundation/Auth/AuthReady';
 import { AuthSidecar, getAuthState } from '@/foundation/Auth/AuthStore';
 import schema from '@/gql/urql.schema.json' with { type: 'json' };
 import { resolveResourceSchema } from '@/resource';
-import { WenerLogo } from '@/wener/WenerLogo';
 import './globals.css';
 import { ContextStoreProvider } from '@wener/console/hooks';
 import { LoginPage, type LoginFormData } from '@wener/console/pages';
@@ -21,6 +19,7 @@ import { showErrorToast, showSuccessToast } from '@wener/console/toast';
 import { getConsoleContext, Image } from '@wener/console/web';
 import Splash from '@/assets/LoginSplash.jpg';
 import { getSiteState } from '@/foundation/Site/SiteStore';
+import { Instance } from '@/instance';
 
 const Content = lazy(() => import('./ConsoleAppContent'));
 
@@ -43,40 +42,36 @@ export const ConsoleApp = () => {
   };
   const { title } = getSiteState();
   return (
-    <>
-      <ComponentProvider components={[{ provide: SiteLogo, Component: WenerLogo }]}>
-        <AuthSidecar
-          actions={{
-            refresh: AuthActions.refreshAccessToken,
-          }}
-        />
-        <AuthReady>
-          <ReactQueryClientProvider>
-            <UrqlProvider value={getUrqlClient()}>
-              {/* fixme Change this */}
-              <ContextStoreProvider value={getConsoleContext().getModuleService().store}>
-                <AuthBlock
-                  fallback={
-                    <LoginPage
-                      title={title}
-                      logo={<SiteLogo className={'h-10 w-10'} />}
-                      onSubmit={doLogin}
-                      hero={
-                        <Image className='absolute inset-0 h-full w-full object-cover' src={Splash} alt={'splash'} />
-                      }
-                    />
-                  }
-                >
-                  <ErrorSuspenseBoundary>
-                    <Content />
-                  </ErrorSuspenseBoundary>
-                </AuthBlock>
-              </ContextStoreProvider>
-            </UrqlProvider>
-          </ReactQueryClientProvider>
-        </AuthReady>
-      </ComponentProvider>
-    </>
+    <Instance.Provide>
+      <AuthSidecar
+        actions={{
+          refresh: AuthActions.refreshAccessToken,
+        }}
+      />
+      <AuthReady>
+        <ReactQueryClientProvider>
+          <UrqlProvider value={getUrqlClient()}>
+            {/* fixme Change this */}
+            <ContextStoreProvider value={getConsoleContext().getModuleService().store}>
+              <AuthBlock
+                fallback={
+                  <LoginPage
+                    title={title}
+                    logo={<SiteLogo className={'h-10 w-10'} />}
+                    onSubmit={doLogin}
+                    hero={<Image className='absolute inset-0 h-full w-full object-cover' src={Splash} alt={'splash'} />}
+                  />
+                }
+              >
+                <ErrorSuspenseBoundary>
+                  <Content />
+                </ErrorSuspenseBoundary>
+              </AuthBlock>
+            </ContextStoreProvider>
+          </UrqlProvider>
+        </ReactQueryClientProvider>
+      </AuthReady>
+    </Instance.Provide>
   );
 };
 

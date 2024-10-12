@@ -1,5 +1,5 @@
+import type { GeneralResponseObject } from '@wener/nestjs/type-graphql';
 import { createPubSub } from 'graphql-yoga';
-import type { GeneralResponseObject } from '@/type-graphql';
 
 const pubSub = createPubSub<{
   TICKER: [GeneralResponseObject];

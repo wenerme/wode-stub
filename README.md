@@ -22,6 +22,7 @@
 
 - [ ] DB Migration
 - [ ] Resource Table
+- [ ] i18n
 
 ## 系统架构
 
@@ -41,15 +42,25 @@
 ## 目录结构
 
 - apps/
-  - console - React & Vite - 纯静态控制台前端
-  - server - 服务端
-    - src/apps - 入口
-      - wode-api-server - GraphQL API Server
-      - wode-worker - BullMQ Worker
+  - console/ - React & Vite - 纯静态控制台前端
+    - src/
+      - instance/ - 自定义内容
+      - console/ - 控制台本身相关
+      - foundation/ - 基础模块内容
+      - gql/ - GraphQL Codegen
+      - components/ - 基础公共组件
+  - server/ - 服务端
+    - src/
+      - apps/*/main.ts - 入口
+        - wode-api-server - GraphQL API Server
+        - wode-worker - BullMQ Worker
+      - foundation/
+      - server/ - 服务端本身相关内容
+      - graph/ - GraphQL Schema
   - [ ] web - React & NextJS - 网站 - 例如 官网，营销页
   - [ ] mini - 小程序
 - packages/
-  - common - 公共
+  - common/ - 公共 - 后端 & 前端 & Mini & Web 公共内容
 
 ## dev
 

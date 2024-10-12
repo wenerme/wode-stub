@@ -34,10 +34,10 @@ import { AuthEntityRoleEntity } from '@/foundation/Auth/entity/AuthEntityRoleEnt
 import { AuthPermissionEntity } from '@/foundation/Auth/entity/AuthPermissionEntity';
 import { AuthRoleEntity } from '@/foundation/Auth/entity/AuthRoleEntity';
 import { UserEntity } from '@/foundation/User/entity/UserEntity';
+import { DeleteEntityInput, DeleteEntityPayload } from '@/graph/common';
 import { SystemRole } from '@/graph/const';
 import { HasRoleObject } from '@/graph/HasRoleObject';
 import { createImportInput, createImportPayload } from '@/graph/ImportEntityResolver';
-import { DeleteEntityInput, DeleteEntityPayload } from '@/type-graphql/BaseResolver';
 
 @ObjectType('AuthRole', { implements: [HasRoleObject] })
 export class AuthRoleObject extends mixin(BaseObject, withStateStatusType) {

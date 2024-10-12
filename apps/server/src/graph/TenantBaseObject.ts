@@ -1,6 +1,5 @@
-import { BaseNode, RelayNode } from '@wener/nestjs/type-graphql';
+import { BaseNode, BaseObject, RelayNode } from '@wener/nestjs/type-graphql';
 import { ObjectType } from 'type-graphql';
-import { BaseObject } from '@/type-graphql';
 
 @ObjectType({ implements: [RelayNode, BaseNode] })
 export class TenantBaseObject extends BaseObject {

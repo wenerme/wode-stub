@@ -14,8 +14,8 @@ import 'dayjs/locale/zh-hk';
 import 'dayjs/locale/zh-tw';
 import React from 'react';
 
-const BaseInit = defineInit({
-  name: 'Base',
+const EnvironmentInit = defineInit({
+  name: 'Environment',
   onInit: () => {
     // avoid potential dependency
     window.React ||= React;
