@@ -59,6 +59,9 @@ npm add -g pnpm@latest
 pnpm i
 ```
 
+- 准备 PG
+- 导入数据库 Schema ./db/wode/migrations
+
 **server**
 
 ```bash
