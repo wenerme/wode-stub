@@ -1,0 +1,64 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "globalDependencies": [
+    "pnpm-lock.yaml",
+    "rollup.config.ts",
+    "rollup.config.js"
+  ],
+  "tasks": {
+    "deploy": {
+      "dependsOn": [
+        "build"
+      ],
+      "env": [
+        "CI_COMMIT_TAG",
+        "CI_COMMIT_BRANCH",
+        "DOCKER_REGISTRY",
+        "IMAGE_REGISTRY"
+      ],
+      "inputs": [
+        "deploy.sh",
+        "docker-bake.hcl",
+        "Dockerfile",
+        "builds/docker-bake.hcl",
+        "builds/*/Dockerfile"
+      ],
+      "outputs": []
+    },
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        "lib/**",
+        ".next/**",
+        "!.next/cache/**"
+      ],
+      "inputs": [
+        "Makefile",
+        "build.sh",
+        "src/**/*.tsx",
+        "src/**/*.ts",
+        "src/**/*.js",
+        "src/**/*.jsx",
+        "src/**/*.css"
+      ]
+    },
+    "test": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": []
+    },
+    "lint": {
+      "outputs": []
+    },
+    "clean": {
+      "outputs": []
+    },
+    "dev": {
+      "cache": false
+    }
+  }
+}

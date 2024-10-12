@@ -1,0 +1,78 @@
+{
+  "name": "@wener/wode-root",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Wener Node Monorepo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wenerme/wode.git"
+  },
+  "homepage": "https://github.com/wenerme/wode#readme",
+  "bugs": {
+    "url": "https://github.com/wenerme/wode/issues"
+  },
+  "author": "wener",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "components/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "turbo run lint",
+    "preinstall": "npx only-allow pnpm"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
+    "@swc/cli": "^0.4.0",
+    "@swc/core": "1.7.28",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.9",
+    "@tailwindcss/typography": "^0.5.15",
+    "@types/jsdom": "^21.1.7",
+    "@types/node": "^20.16.11",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.2",
+    "@vitest/ui": "^2.1.2",
+    "autoprefixer": "^10.4.20",
+    "cssnano": "^7.0.6",
+    "daisyui": "^4.12.13",
+    "esbuild": "^0.24.0",
+    "globby": "^14.0.2",
+    "jsdom": "^25.0.1",
+    "pg": "^8.13.0",
+    "pg-hstore": "^2.3.4",
+    "postcss": "^8.4.47",
+    "prettier": "^3.3.3",
+    "prettier-plugin-pkg": "^0.18.1",
+    "prettier-plugin-tailwindcss": "^0.6.8",
+    "tailwindcss": "^3.4.13",
+    "tailwindcss-animate": "^1.0.7",
+    "ts-add-js-extension": "^1.6.4",
+    "ts-node": "11.0.0-beta.1",
+    "tsx": "^4.19.1",
+    "turbo": "^2.1.3",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.8",
+    "vitest": "^2.1.2"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "ts-node@11.0.0-beta.1": "patches/ts-node@11.0.0-beta.1.patch"
+    }
+  },
+  "packageManager": "pnpm@9.12.0"
+}

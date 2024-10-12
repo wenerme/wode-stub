@@ -1,0 +1,21 @@
+{
+  "name": "common",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "exports": {
+    ".": "./src/index.ts",
+    "./meta": "./src/meta/index.ts",
+    "./package.json": "./package.json"
+  },
+  "keywords": [],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@wener/utils": "^1.1.50",
+    "es-toolkit": "^1.24.0"
+  }
+}
